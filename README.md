@@ -31,7 +31,7 @@ Here is a sample TOC(*wow! such cool!*) that is actually the TOC for this README
 In this project we take image of the student Id card and extracts the student Id from it by performing digital image processing and check if he/she is a valid student or not. If he/she is found a valid student we just fetch the data with the help of id extracted from the image.
 
 # Installation
-* sqlite2
+* sqlite3
 * opencv-python
 * pytesseract
 * Tesseract on your system
