@@ -12,7 +12,7 @@ import sqlite3
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
   
 # Read image from which text needs to be extracted 
-img = cv2.imread("s5.png") 
+img = cv2.imread("../Dataset/s5.png") 
   
 # Preprocessing the image starts 
   
@@ -41,7 +41,6 @@ im2 = img.copy()
 # Looping through the identified contours 
 # Then rectangular part is cropped and passed on 
 # to pytesseract for extracting text from it 
-# Extracted text is then written into the text file 
 
 
 #id_name and length to be set as per the id card which you are using this model for
@@ -52,12 +51,13 @@ for cnt in contours:
     x, y, w, h = cv2.boundingRect(cnt) 
       
     # Drawing a rectangle on copied image 
-    rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2) 
+    rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (255,0,0), 2) 
       
     # Cropping the text block for giving input to OCR 
     cropped = im2[y:y + h, x:x + w]   
     # Apply OCR on the cropped image 
     text = pytesseract.image_to_string(cropped) 
+    print(text)
     nid=''
     for i in range(len(text)):
         
@@ -71,7 +71,7 @@ for cnt in contours:
     
 
 
-conn = sqlite3.connect('TestDB.db')  
+conn = sqlite3.connect('../TestDB.db')  
 c = conn.cursor() 
 c.execute('''SELECT * FROM students where STUDENT_ID=?''',(nid,))
 result=c.fetchone()
